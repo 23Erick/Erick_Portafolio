@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Erick - Portafolio</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos (integrados para facilitar) -->
+   <link rel="stylesheet" href="styles.css">
+
+
+
+
+</head>
+<body>
+  <!-- TOP HEADER -->
+  <div class="top-header" role="banner">
+    <h1>📘Portafolio personal</h1>
+    <div>
+      <button id="loginBtn" class="btn btn-login">Iniciar sesión</button>
+      <button id="logoutBtn" class="btn btn-logout" style="display:none;">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO / PROFILE -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1 class="title">Soy <span class="accent">Erick </span></h1>
+          <p class="subtitle">Soy Erick Gabriel Marcos Serna, universitario y estudiante de la carrera de Ingeniería de Sistemas e Informática. Me considero una persona comprometida con mi formación profesional, con gran interés en el aprendizaje continuo y en la aplicación de mis conocimientos para resolver problemas reales mediante la tecnología.</p>
+       
+          <div class="cta-row">
+            <a class="btn primary" href="#contact">Contáctame</a>
+            <a class="btn outline" href="#projects">Ver proyectos</a>
+          </div>
+        </div>
+
+        <aside class="hero-right">
+          <div class="card-profile">
+            <div class="profile-photo" style="background-image:url('img.png')"></div>
+            <div class="profile-info">
+              <h3>Erick Gabriel Marcos Serna</h3>
+              <p class="role">Ingeniero en Sistemas & Desarrollador</p>
+              <ul class="quick-info">
+                <li><strong>Ubicación:</strong> Huancayo, Perú</li>
+                <li><strong>Correo:</strong> erick@gmail.com</li>
+                <li><strong>Disponibilidad:</strong> Freelancer / Full-time</li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">Sobre mí</h2>
+        <p>Durante mi formación académica he desarrollado habilidades en áreas como programación, bases de datos, redes, gestión de proyectos y seguridad de la información. Asimismo, me motiva la investigación y la innovación, buscando siempre soluciones creativas y eficientes que aporten valor en entornos académicos y profesionales.
+
+Mi objetivo es consolidar mi perfil como futuro profesional en el campo de la ingeniería de sistemas, contribuyendo al desarrollo tecnológico y al fortalecimiento de la transformación digital en las organizaciones.</p>
+      </div>
+    </section>
+
+    <!-- COURSES -->
+    <section id="courses" class="section">
+      <div class="container">
+        <h2 class="section-title">Cursos</h2>
+        <p class="section-sub">Haz clic en un curso para ver las semanas y archivos.</p>
+
+        <div class="cards-grid courses-grid">
+          <article class="card course-card" onclick="openCourse('Arquitectura de Software')">
+            <div class="card-head">
+              <h3>Arquitectura de Software</h3>
+              <span class="tag">Diseño & Escalabilidad</span>
+            </div>
+            <p>Modelado, patrones y estrategias de despliegue.</p>
+          </article>
+
+          <article class="card course-card" onclick="openCourse('Sistemas Operativos')">
+            <div class="card-head">
+              <h3>Sistemas Operativos</h3>
+              <span class="tag">Instalación & Administración</span>
+            </div>
+            <p>Procesos, concurrencia y administración de servidores.</p>
+          </article>
+
+          <article class="card course-card" onclick="openCourse('Desarrollo de Aplicaciones')">
+            <div class="card-head">
+              <h3>Desarrollo de Aplicaciones</h3>
+              <span class="tag">Frontend & Backend</span>
+            </div>
+            <p>APIs, frameworks modernos y despliegue continuo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal Cursos (oculto inicialmente) -->
+  <div id="courseModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-content">
+      <div class="modal-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <h2 id="courseTitle"></h2>
+        <div>
+          <input id="searchInput" placeholder="Buscar archivo..." oninput="filterFiles()" style="padding:8px;border-radius:8px;border:1px solid #eee;margin-right:8px">
+          <button class="close" onclick="closeCourse()">&times;</button>
+        </div>
+      </div>
+
+      <div id="weeksContainer"></div>
+    </div>
+  </div>
+
+  <!-- Login modal -->
+  <div id="loginModal" class="login-modal" aria-hidden="true">
+    <div class="login-card">
+      <h3>Iniciar sesión</h3>
+      <input id="loginEmail" type="email" placeholder="Correo" />
+      <input id="loginPassword" type="password" placeholder="Contraseña" />
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button id="doLogin" class="btn primary">Entrar</button>
+        <button id="doRegister" class="btn" style="background:#00c851;color:white">Registrarse</button>
+      </div>
+      <p id="loginError" style="color:#e63946;margin-top:8px"></p>
+      <p style="font-size:13px;color:var(--muted);margin-top:6px">Usuarios de prueba: <strong>erick@gmail.com/admin</strong> (admin) — <strong>invitado@gmail.com/invitado</strong></p>
+    </div>
+  </div>
+
+  <!-- Projects / Contact / Footer -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">Proyecto</h2>
+      <div class="cards-grid projects-grid">
+        <article class="card project-card">
+          <h3>Página web </h3>
+          <p>En esta pagina web redacto todo sobre la carrera y lo lindo de ella</p>
+          <a class="link" href="#">Ver repositorio</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section id="contact" class="section section-contact">
+    <div class="container">
+      <h2 class="section-title">Contacto</h2>
+      <form id="contactForm" class="contact-form" novalidate>
+        <div class="form-row">
+          <input type="text" name="contactName" id="contactName" placeholder="Tu nombre" required>
+          <input type="email" name="contactEmail" id="contactEmail" placeholder="Tu correo" required>
+        </div>
+        <textarea name="contactMessage" id="contactMessage" rows="6" placeholder="Tu mensaje" required></textarea>
+        <div class="form-row actions" style="margin-top:8px">
+          <button type="submit" class="btn primary">Enviar mensaje</button>
+          <button type="reset" class="btn outline">Limpiar</button>
+        </div>
+        <p class="form-feedback" id="formFeedback" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Erick — Todos los derechos reservados</div>
+      <div class="footer-links"><a href="#">Política de Privacidad</a><a href="#">Términos</a></div>
+    </div>
+  </footer>
+
+  <!-- Supabase JS (v2) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    // -------------------------------
+    // Configuración Supabase (tus credenciales)
+    // -------------------------------
+    const SUPABASE_URL = "https://yhffwujihboljvatdzit.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloZmZ3dWppaGJvbGp2YXRkeml0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMzAyNzQsImV4cCI6MjA3NDYwNjI3NH0.hBnvIRrX-4bpMvehELN-LGfCofYYO3exoC-dhfm-n-0";
+
+    // crear instancia - usando window.supabase (la lib expone esto)
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Estado de usuario
+    let currentUser = null;
+    let isAdmin = false;
+    let currentCourse = "";
+
+    // Elementos DOM reutilizados
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginModal = document.getElementById('loginModal');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPassword = document.getElementById('loginPassword');
+    const doLogin = document.getElementById('doLogin');
+    const doRegister = document.getElementById('doRegister');
+    const loginError = document.getElementById('loginError');
+    const courseModal = document.getElementById('courseModal');
+    const courseTitle = document.getElementById('courseTitle');
+    const weeksContainer = document.getElementById('weeksContainer');
+    const searchInput = document.getElementById('searchInput');
+
+    // Mostrar año en footer
+    document.getElementById('year').innerText = new Date().getFullYear();
+
+    // --- Persistencia de sesión al cargar la página ---
+    (async function initAuth() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session && session.user) {
+        setUser(session.user);
+      }
+      // Escuchar cambios de sesión (login/logout)
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (session && session.user) setUser(session.user);
+        else clearUser();
+      });
+    })();
+
+    // --- Helper: set / clear user ---
+    function setUser(user) {
+      currentUser = user;
+      isAdmin = (user.email === "erick@gmail.com");
+      loginBtn.style.display = 'none';
+      logoutBtn.style.display = 'inline-block';
+    }
+    function clearUser() {
+      currentUser = null;
+      isAdmin = false;
+      loginBtn.style.display = 'inline-block';
+      logoutBtn.style.display = 'none';
+      closeCourse();
+    }
+
+    // --- Mostrar / ocultar modal login ---
+    loginBtn.addEventListener('click', () => {
+      loginModal.style.display = 'flex';
+      loginModal.setAttribute('aria-hidden', 'false');
+      loginError.innerText = '';
+    });
+    // Cerrar el modal si se hace click fuera (mejorar si quieres)
+    loginModal.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.style.display = 'none';
+      }
+    });
+
+    // --- Login ---
+    doLogin.addEventListener('click', async () => {
+      loginError.innerText = '';
+      const email = loginEmail.value.trim();
+      const password = loginPassword.value;
+      if (!email || !password) { loginError.innerText = 'Completa correo y contraseña.'; return; }
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) {
+        loginError.innerText = error.message;
+      } else {
+        setUser(data.user);
+        loginModal.style.display = 'none';
+        loginEmail.value = ''; loginPassword.value = '';
+        alert('Bienvenido ' + data.user.email);
+      }
+    });
+
+    // --- Registro simple ---
+    doRegister.addEventListener('click', async () => {
+      loginError.innerText = '';
+      const email = loginEmail.value.trim();
+      const password = loginPassword.value;
+      if (!email || !password) { loginError.innerText = 'Completa correo y contraseña.'; return; }
+
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (error) {
+        loginError.innerText = error.message;
+      } else {
+        loginError.innerText = 'Cuenta creada. Revisa tu correo o inicia sesión.';
+      }
+    });
+
+    // --- Logout ---
+    logoutBtn.addEventListener('click', async () => {
+      await supabase.auth.signOut();
+      clearUser();
+    });
+
+    // --- Abrir curso y generar 16 semanas ---
+    function openCourse(courseName) {
+      currentCourse = courseName;
+      courseTitle.innerText = courseName;
+      weeksContainer.innerHTML = '';
+      // Generar 16 semanas
+      for (let i = 1; i <= 16; i++) {
+        const weekBlock = document.createElement('div');
+        weekBlock.className = 'week-folder';
+        weekBlock.innerHTML = `
+          <div class="week-top">
+            <div><strong>Semana ${i}</strong></div>
+            <div>
+              ${isAdmin ? `<input id="fileInput-${i}" type="file" accept="application/pdf" style="display:inline-block">
+              <button onclick="uploadFile(${i})" style="margin-left:8px;padding:6px 8px;border-radius:6px;background:var(--blue);color:white;border:none;cursor:pointer">Subir</button>` : ''}
+              <button onclick="loadFiles(${i})" style="margin-left:8px;padding:6px 8px;border-radius:6px;background:#f3f6ff;color:var(--blue);border:none;cursor:pointer">Actualizar</button>
+            </div>
+          </div>
+          <ul id="fileList-${i}" class="file-list"></ul>
+        `;
+        weeksContainer.appendChild(weekBlock);
+        // cargar archivos de esa semana
+        loadFiles(i);
+      }
+      courseModal.style.display = 'flex';
+      courseModal.setAttribute('aria-hidden', 'false');
+    }
+
+    // Cerrar modal curso
+    function closeCourse() {
+      courseModal.style.display = 'none';
+      courseModal.setAttribute('aria-hidden', 'true');
+      currentCourse = '';
+      weeksContainer.innerHTML = '';
+      searchInput.value = '';
+    }
+
+    // Hacer globalmente accesible openCourse y closeCourse
+    window.openCourse = openCourse;
+    window.closeCourse = closeCourse;
+
+    // --- Upload file (solo admin) ---
+    window.uploadFile = async function(week) {
+      if (!currentUser) { alert('Debes iniciar sesión.'); return; }
+      if (!isAdmin) { alert('No tienes permisos para subir.'); return; }
+
+      const input = document.getElementById(`fileInput-${week}`);
+      if (!input || input.files.length === 0) { alert('Selecciona un archivo PDF.'); return; }
+      const file = input.files[0];
+
+      const safeCourse = currentCourse.replace(/\s+/g, '_');
+      const path = `${safeCourse}/Semana${week}/${file.name}`;
+
+      const { error } = await supabase.storage.from('cursos').upload(path, file, { upsert: true });
+      if (error) {
+        alert('Error subiendo: ' + error.message);
+      } else {
+        alert('Archivo subido ✅');
+        input.value = null;
+        loadFiles(week);
+      }
+    };
+
+    // --- Load files for a given week ---
+    window.loadFiles = async function(week) {
+      const listEl = document.getElementById(`fileList-${week}`);
+      if (!listEl) return;
+      listEl.innerHTML = '<li style="color:var(--muted)">Cargando...</li>';
+
+      const safeCourse = currentCourse.replace(/\s+/g, '_');
+      const prefix = `${safeCourse}/Semana${week}/`;
+      const { data, error } = await supabase.storage.from('cursos').list(prefix);
+
+      if (error) {
+        listEl.innerHTML = `<li style="color:#e63946">Error: ${error.message}</li>`;
+        return;
+      }
+      if (!data || data.length === 0) {
+        listEl.innerHTML = '<li style="color:var(--muted)">No hay archivos</li>';
+        return;
+      }
+
+      listEl.innerHTML = '';
+      for (const f of data) {
+        const filePath = `${prefix}${f.name}`;
+        const { data: urlResp } = supabase.storage.from('cursos').getPublicUrl(filePath);
+        const publicUrl = urlResp.publicUrl;
+
+        const li = document.createElement('li');
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = f.name;
+
+        const actions = document.createElement('div');
+        actions.className = 'file-actions';
+
+        const viewA = document.createElement('a');
+        viewA.href = publicUrl; viewA.target = '_blank'; viewA.innerText = 'Ver';
+        const dlA = document.createElement('a');
+        dlA.href = publicUrl; dlA.download = f.name; dlA.innerText = 'Descargar';
+
+        actions.appendChild(viewA);
+        actions.appendChild(dlA);
+
+        if (isAdmin) {
+          const delBtn = document.createElement('button');
+          delBtn.innerText = 'Eliminar';
+          delBtn.onclick = async () => {
+            if (!confirm(`Eliminar ${f.name}?`)) return;
+            const { error: rmErr } = await supabase.storage.from('cursos').remove([filePath]);
+            if (rmErr) return alert('Error eliminando: ' + rmErr.message);
+            alert('Eliminado ✅');
+            loadFiles(week);
+          };
+          actions.appendChild(delBtn);
+        }
+
+        li.appendChild(nameSpan);
+        li.appendChild(actions);
+        li.setAttribute('data-filename', f.name.toLowerCase());
+        listEl.appendChild(li);
+      }
+      // aplicar filtro actual (si hay texto en buscador)
+      filterFiles();
+    };
+
+    // --- Filtrar archivos por nombre en todas las semanas ---
+    function filterFiles() {
+      const q = (document.getElementById('searchInput')?.value || '').toLowerCase();
+      const items = document.querySelectorAll('#weeksContainer .file-list li');
+      items.forEach(li => {
+        const filename = li.getAttribute('data-filename') || '';
+        li.style.display = filename.includes(q) ? 'flex' : 'none';
+      });
+    }
+    window.filterFiles = filterFiles;
+
+    // --- Manejo simple del formulario de contacto (solo demo) ---
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      document.getElementById('formFeedback').innerText = 'Mensaje enviado. ¡Gracias!';
+      e.target.reset();
+    });
+
+    // Accessibility: cerrar modal curso con Escape
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (courseModal.style.display === 'flex') closeCourse();
+        if (loginModal.style.display === 'flex') loginModal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
